@@ -1,6 +1,6 @@
 # RT Todo App
 
-This is a simple Todo App built using ReactJS. It allows you to add, remove and mark items as completed. The app uses local storage to persist the todo items. The app is responsive and works on mobile devices as well. The app is live at https://rt-to-do.netlify.app/
+This is a simple Todo App built using ReactJS. It allows you to add, remove and mark items as completed. The app uses local storage to persist the todo items. The app is responsive and works on mobile devices as well. The app is live at https://musical-kelpie-bfe685.netlify.app/
 
 ## Installation
 
