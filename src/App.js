@@ -2,6 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import ToDoList from "./components/ToDoList";
 import AddItemInput from "./components/AddItem";
+import Filters from "./components/Filters";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
@@ -21,6 +22,24 @@ function App() {
     const allCompleted = toDoList.every((todo) => {
         return todo.isCompleted === true;
     });
+
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const [isSorted, setIsSorted] = useState(false);
+
+    const onSearchChangeHandler = (e) => {
+        if (e.target.value !== "") {
+            const searchQuery = e.target.value.toLowerCase();
+            console.log(searchQuery);
+            const newToDoList = toDoList.filter((todo) => {
+                return todo.name.toLowerCase().includes(searchQuery);
+            });
+            setSearchResults(newToDoList);
+        } else {
+            setSearchResults(toDoList);
+        }
+        setSearchTerm(e.target.value);
+    };
 
     const onClickAddHandler = () => {
         if (item === "") {
@@ -56,6 +75,7 @@ function App() {
             return todo.id !== todoObject.id;
         });
         setToDoList(updatedToDoList);
+        setSearchResults(updatedToDoList);
     };
 
     const onClickSelectHandler = (todoObject) => {
@@ -68,12 +88,23 @@ function App() {
         setToDoList(updatedToDoList);
     };
 
+    const onClickSortHandler = () => {
+        setIsSorted(!isSorted);
+    };
+
     return (
         <div className="App">
             <div className="app-container">
                 <header className="app-header">
                     <h1 className="app-title">RT TODO APP</h1>
                 </header>
+                <Filters
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    onSearchChangeHandler={onSearchChangeHandler}
+                    onClickSortHandler={onClickSortHandler}
+                    isSorted={isSorted}
+                />
                 {
                     <div className="todo-status">
                         <span className="todo-status-text">
@@ -83,10 +114,17 @@ function App() {
                 }
                 <ToDoList
                     toDoList={toDoList}
+                    searchTerm={searchTerm}
+                    searchResults={searchResults}
+                    setItem={setItem}
                     setToDoList={setToDoList}
+                    editing={editing}
+                    setEditing={setEditing}
+                    isSorted={isSorted}
                     onClickEditHandler={onClickEditHandler}
                     onClickDeleteHandler={onClickDeleteHandler}
                     onClickSelectHandler={onClickSelectHandler}
+                    onClickSaveHandler={onClickSaveHandler}
                 />
                 <AddItemInput
                     item={item}
