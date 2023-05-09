@@ -1,3 +1,7 @@
+/**
+ * Filters component is used to display the search bar and sort button.
+ * If the sort button is clicked, then the list is sorted.
+ */
 function Filters({searchTerm, setSearchTerm, onSearchChangeHandler, onClickSortHandler, isSorted}) {
   let ButtonText = isSorted ? "Unsort" : "Sort";
   return (

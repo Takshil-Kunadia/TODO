@@ -2,20 +2,29 @@ import EditSVG from '../assets/edit-pencil.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-function ToDoItem({todo, setItem, editing, setEditing, onClickEditHandler, onClickDeleteHandler, onClickSelectHandler, onClickSaveHandler}) {
+/**
+ * ToDoItem component is used to display the to-do item.
+ */
+function ToDoItem({item, todo, setItem, editing, setEditing, onClickEditHandler, onClickDeleteHandler, onClickSelectHandler, onClickSaveHandler}) {
 
   let inputContainer;
+
+  /**
+   * If the to-do item is being edited, then it is displayed with an input field.
+   * If the to-do item is not being edited, then it is displayed as it is.
+   */
   if(editing && editing.id === todo.id){
     inputContainer = (
         <div className="edit-item input-container">
           <form className="item-input">
-          <input type="text" className="edit-item-input" placeholder="Edit Task ;)" defaultValue={todo.name} onChange={(e) => {e.stopPropagation(); setItem(e.target.value)}}/>
+          <input type="text" className="edit-item-input" placeholder="Edit Task ;)" defaultValue={todo.name} onChange={(e) => {setItem(e.target.value)}}/>
           <button className="edit-input-button"
           onClick={(e)=>{
               e.preventDefault();
-              e.stopPropagation();
-              onClickSaveHandler();
+              if(item && "" !== item.trim()){
+                onClickSaveHandler();
               }
+            }
           }>
                 <FontAwesomeIcon icon={faCheck} />
               </button>
@@ -28,6 +37,9 @@ function ToDoItem({todo, setItem, editing, setEditing, onClickEditHandler, onCli
   );
   }
 
+    /**
+     * The to-do item is displayed with a checkbox, the to-do item name and two buttons.
+     */
     return (
       <div className={"to-do-item" + (todo.isCompleted ? " todo-completed" : "")}>
         <input type="checkbox" checked={todo.isCompleted} onChange={(e) => {e.stopPropagation(); onClickSelectHandler(todo)}}/>
@@ -45,5 +57,5 @@ function ToDoItem({todo, setItem, editing, setEditing, onClickEditHandler, onCli
       </div>
     );
   }
-  
+
 export default ToDoItem;

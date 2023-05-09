@@ -151,13 +151,16 @@
   color: #ffffff;
 }
 
+.editing-item-status {
+  padding: 1rem;
+}
+
 .to-do-item span {
   flex: 1;
   font-size: 1.5rem;
   font-weight: 300;
   word-break: break-all;
   padding: 0 1rem;
-  cursor: pointer;
 }
 
 .input-container {
@@ -217,7 +220,6 @@ input[type="checkbox"] {
   width: 1.6em;
   height: 1.6em;
   border-radius: 0.15em;
-  cursor: pointer;
 }
 
 .form-control + .form-control {

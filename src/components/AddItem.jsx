@@ -1,7 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-// Component for displaying to-do card
+/**
+ * AddItemInput component is used to add new item in the list
+ * If the input field is not empty, then the new item is added to the list.
+ */
 function AddItemInput({item, editing, setItem, onClickAddHandler}) {
     return (
       <div className="add-item input-container">
